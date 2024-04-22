@@ -1,0 +1,52 @@
+.autocompleteInput {
+    display: inline-block;
+    position: relative;
+    width: 300px;
+
+    .search {
+        padding: 12px; 
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px; 
+        width: 100%;
+        box-sizing: border-box;    
+    }
+
+    .search:hover {
+        outline: none; 
+        border-color: #66afe9; 
+    }
+
+    .suggestions {
+        list-style-type: none;
+        padding: 0; 
+        margin: 0;
+        border-top: none; 
+        border-radius: 0 0 5px 5px; 
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        word-break: break-word;
+    }
+
+    .suggestion {
+        text-align: left;
+        padding: 8px;
+        cursor: pointer;
+    }
+
+    .bold-text {
+        font-weight: 700;
+    }
+
+    .suggestions li:hover {
+        background-color: #f0f0f0;
+    }
+    
+    .suggestions li.active-suggestion {
+        background-color: #c7c7c7;
+    }
+
+    .suggestions li:not(:last-of-type) {
+        border-bottom: 1px solid #ccc;
+    }
+}

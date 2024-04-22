@@ -1,5 +1,14 @@
 .App {
+  display: block;
   text-align: center;
+  justify-content: center; 
+  align-items: center;
+  margin-top: 36px;
+}
+
+.header {
+  margin: 24px;
+  color: gray;
 }
 
 .App-logo {
