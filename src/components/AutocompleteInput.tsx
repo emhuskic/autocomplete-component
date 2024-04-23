@@ -102,7 +102,7 @@ const AutocompleteInput = ({ onValueChange }: AutocompleteInputProps) => {
     }
     const containerRef = useOutsideClick(clearSuggestions);
 
-    return <div className="autocompleteInput" ref={containerRef}>
+    return (<div className="autocompleteInput" ref={containerRef}>
         <input 
             className="search"
             placeholder='Search'
@@ -114,7 +114,7 @@ const AutocompleteInput = ({ onValueChange }: AutocompleteInputProps) => {
         <ul className="suggestions">
             {suggestions.map((suggestion, index) => (
                 <li
-                    className={index === currentSuggestionIndex ? "suggestion active-suggestion" : "suggestion"}
+                    className={`suggestion ${index === currentSuggestionIndex && " active-suggestion"}`}
                     key={index}
                     onClick={() => selectSuggestion(index)}
                 >
@@ -125,7 +125,7 @@ const AutocompleteInput = ({ onValueChange }: AutocompleteInputProps) => {
             ))
             }
         </ul>
-    </div>;
+    </div>);
 };
 
 export default AutocompleteInput;
