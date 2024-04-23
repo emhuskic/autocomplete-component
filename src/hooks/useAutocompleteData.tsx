@@ -12,6 +12,8 @@ interface WordScore {
     score: number,
 };
 
+// This API always returns maximum of 10 elements
+// So we don't have to think of pagination / limitations
 const apiUrl = "https://api.datamuse.com/sug?s=";
 
 function useAutocompleteData(word: string): AutocompleteData {
@@ -34,6 +36,7 @@ function useAutocompleteData(word: string): AutocompleteData {
         // });
 
         // const fetchedData = await response;
+        // setData(fetchedData);
 
         const response = await fetch(apiUrl + word);
   
