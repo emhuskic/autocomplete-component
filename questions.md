@@ -89,6 +89,28 @@ const withAuth = (WrappedComponent: Function) => {
 
 ## 7. What's the difference in handling exceptions in promises, callbacks and async...await?
 
+1. Promises - catch method to handle rejection of a promise
+```
+promiseMethod().then(() =>  {// handling promise resolution}).catch(error => {//handling error})
+```
+
+2. Callbacks - first parameter of the callback method is conventionally an error (can lead to callback hell)
+```
+promiseMethod((error, callback) => {
+    if (error) {
+        // handle error
+    }
+});
+```
+
+3. Async/await - catch block // promises looking like synchronous code
+```
+try {
+    await promiseMethod();
+} catch (error) {
+    // handle error
+}
+```
 
 ## 8. How many arguments does setState take and why is it async.
 
@@ -100,7 +122,131 @@ setState is async as React batches multiple setState updates into one - to make 
 
 ## 9. List the steps needed to migrate a Class to Function Component.
 
+1. Replace Class declaration with Function declaration, props are not initialized in constructor anymore, but received as function argument. Also, replace all usages of "this.props" with just "props". Also, replace all "this.something" with just "something".
+```
+// Class
+class ExampleClass extends React.Component {
+    // initialization of props/state
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    // lifecycle methods
+
+    render() {
+        <div>Example</div>
+    }
+}
+
+// Function
+const ExampleFunction = (props) => {
+    return (<div>Example</div>);
+}
+```
+
+2. Replace State & Lifecycle methods with useState and useEffect hooks
+```
+// Class
+class ExampleClass extends React.Component {
+    // initialization of props/state
+    constructor(props) {
+        super(props);
+        this.state = { didMount: false };
+    }
+
+    // lifecycle methods
+    componentDidMount() {
+        this.setState({ didMount: true });
+    }
+
+    render() {
+        <div>Example</div>
+    }
+}
+
+// Function
+const ExampleFunction = (props) => {
+    const [didMount, setDidMount] = useState(false);
+    useEffect(() => {
+        setDidMount(true);
+    }, []);
+    return (<div>Example</div>);
+}
+```
+
+3. Context => useContext & ref => useRef
+4. No need to bind eventHandlers, they must be converted to regular arrow functions
+```
+// Class
+class ExampleClass extends React.Component {
+    // initialization of props/state
+    constructor(props) {
+        super(props);
+        this.state = { didClick: false };
+        this.method = this.method.bind(this);
+    }
+
+    // lifecycle methods
+    method() {
+        this.setState({ didClick: true });
+    }
+
+    render() {
+        <button onClick={method}>Example</button>
+    }
+}
+
+// Function
+const ExampleFunction = (props) => {
+    const [didClick, setDidClick] = useState(false);
+    const method = () => setDidClick(true);
+    return (<button onClick={method}>Example</button>);
+}
+```
+
 
 ## 10. List a few ways styles can be used with components. 
+1. Using inline styles
+```
+return (<div style={{ color: blue }}>Blue colored text</div>);
+```
+
+2. Using CSS classes
+```
+import './styles.css';
+
+...
+
+return (<div className="blue-text">Blue colored text</div>);
+
+
+// CSS FILE IS:
+
+.blue-text {
+    color: blue;
+}
+```
+
+3. Using CSS Modules
+```
+import styles from './styles.module.css';
+
+return (<div style={styles.blueText}>Blue colored text</div>)
+
+
+// CSS FILE IS:
+
+.blueText {
+    color: blue;
+}
+```
 
 ## 11. How to render an HTML string coming from the server.
+
+Only if we trust the server.\
+Using external libraries which also sanitize the input, or:\
+
+```
+<div dangerouslySetInnerHTML={HTMLStringFromServer}>
+```
