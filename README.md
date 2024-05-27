@@ -1,4 +1,4 @@
-# Deel Challenge - Autocomplete React Typescript Component
+# Autocomplete React Typescript Component
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
